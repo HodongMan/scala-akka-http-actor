@@ -21,8 +21,29 @@ import akka.util.Timeout
 
 class HttpActor extends Actor {
     
-    implicit val executionContext = context.dispatcher
-    implicit val system = context.system
-    implicit val timeout = Timeout(10,TimeUnit.SECONDS)
-    implicit val materializer = ActorMaterializer()
+    implicit val executionContext       = context.dispatcher
+    implicit val system                 = context.system
+    implicit val timeout                = Timeout(10,TimeUnit.SECONDS)
+    implicit val materializer           = ActorMaterializer()
+
+    var http : HttpExt                  = null
+    var binding : Future[ServerBinding] = null
+
+    val authenticateActor               = context.actorSelection("/user/authenticateActor")
+    val registerActor                   = context.actorSelection("/user/registerActor")
+
+    override def receive: Receive = {
+
+        case StartWebServerCommand =>
+            if (null == http)
+                startWebServer
+                
+        case StopWebServerCommand =>
+            if (null != binding)
+                Await.result(binding, 10.seconds).terminate(hardDeadline = 3.seconds)
+    }
+
+    def startWebServer = {
+        
+    }
 }
