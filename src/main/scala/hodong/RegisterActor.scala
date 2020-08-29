@@ -10,7 +10,7 @@ class RegisterActor extends Actor {
     override def receive: Receive = {
 
         case message: Registration =>
-            logActor | "Register User" + message.id
+            //logActor | "Register User" + message.id
 
             val data = FileUtil.loadUserFromFile()
 

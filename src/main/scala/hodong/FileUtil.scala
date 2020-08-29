@@ -10,12 +10,12 @@ object FileUtil {
     val usersFile           = new File("users.json")
     val messagesDirectory   = new File("messages")
 
-    def loadUsersFromFile(): Map[String, Registration] = {
+    def loadUserFromFile(): Map[String, Registration] = {
 
         return Map[String, Registration]()
     }
 
-    def saveUsersToFile(items: Map[String, Registration]): Unit = {
+    def saveUserToFile(items: Map[String, Registration]): Unit = {
 
     }
 

@@ -11,11 +11,11 @@ class AuthenticateActor extends Actor {
     override def receive: Receive = {
 
         case message : Envelope =>
-            val users = FileUtil.loadUsersFromFile()
+            val users = FileUtil.loadUserFromFile()
 
             if(users.contains(message.senderId)){
                 logActor ! "Message from "+message.senderId+" accepted"
-                sender() ! new OpSuccess("Operation accepted")\
+                sender() ! new OpSuccess("Operation accepted")
                 senderActor ! message
             } else {
                 logActor ! "Message from "+message.senderId+" refused"

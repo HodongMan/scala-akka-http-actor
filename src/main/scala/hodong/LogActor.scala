@@ -9,7 +9,7 @@ import akka.actor.Actor
 class LogActor extends Actor {
 
   override def receive: Receive = {
-    case message : String =>
+    case message: String =>
       println(new Date()+") "+ message)
   }
 }
