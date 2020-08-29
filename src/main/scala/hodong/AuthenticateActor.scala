@@ -13,12 +13,12 @@ class AuthenticateActor extends Actor {
         case message : Envelope =>
             val users = FileUtil.loadUsersFromFile()
 
-            if(users.contains(msg.senderId)){
-                logActor ! "Message from "+msg.senderId+" accepted"
+            if(users.contains(message.senderId)){
+                logActor ! "Message from "+message.senderId+" accepted"
                 sender() ! new OpSuccess("Operation accepted")\
-                senderActor ! msg
+                senderActor ! message
             } else {
-                logActor ! "Message from "+msg.senderId+" refused"
+                logActor ! "Message from "+message.senderId+" refused"
                 sender() ! new OpFailure("Sender is not registered")
             }
 
